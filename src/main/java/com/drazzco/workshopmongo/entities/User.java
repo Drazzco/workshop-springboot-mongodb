@@ -1,9 +1,12 @@
 package com.drazzco.workshopmongo.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="user")
@@ -16,6 +19,9 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	private String password;
+	
+	@DBRef(lazy = true)
+	private Set<Post> posts = new HashSet<>();
 	
 	public User() {
 	}
@@ -57,6 +63,14 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override

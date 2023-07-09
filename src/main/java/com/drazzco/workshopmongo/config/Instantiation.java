@@ -2,6 +2,7 @@ package com.drazzco.workshopmongo.config;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -42,6 +43,11 @@ public class Instantiation implements CommandLineRunner {
 		Post p2 = new Post(null, Instant.parse("2019-07-05T14:35:52Z"), "Bom dia!", "Acordei...", new AuthorDTO(u3));
 		
 		postRepository.saveAll(Arrays.asList(p1, p2));
+		
+		u2.setPosts(Set.of(p1));
+		userRepository.save(u2);
+		u3.setPosts(Set.of(p2));
+		userRepository.save(u3);
 	}
 
 }
