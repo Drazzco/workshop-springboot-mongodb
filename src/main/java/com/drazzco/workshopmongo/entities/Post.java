@@ -2,12 +2,15 @@ package com.drazzco.workshopmongo.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.drazzco.workshopmongo.dto.AuthorDTO;
+import com.drazzco.workshopmongo.dto.CommentDTO;
 
 @Document
 public class Post implements Serializable {
@@ -20,6 +23,8 @@ public class Post implements Serializable {
 	private String title;
 	private String body;
 	private AuthorDTO author;
+	
+	private Set<CommentDTO> comments = new HashSet<>();
 	
 	public Post() {
 	}
@@ -70,6 +75,14 @@ public class Post implements Serializable {
 
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
+	}
+
+	public Set<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentDTO> comments) {
+		this.comments = comments;
 	}
 
 	@Override
